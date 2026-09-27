@@ -20,7 +20,7 @@ The shipped stage is the cool clinic gray. The Wegovy tablet is a very light ova
 
 Forecast colors encode the year of the estimate. They are not a winner scale. The 30-minute cue uses the wait color only on the Wegovy scene.
 
-`?palette=paper` still loads the rejected direction for this comparison. The public URL with no query is the clinic stage.
+The rejected paper stage is not switchable on the public site. Product stills are composited on `#E4EBF1` so the cutout sits on the stage without a box.
 
 ## Assets
 

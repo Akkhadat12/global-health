@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const serif = Newsreader({
@@ -24,12 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`} data-palette="clinic">
-      <body>
-        <Script id="palette" strategy="beforeInteractive">
-          {`try{var p=new URLSearchParams(location.search).get('palette');if(p==='paper'||p==='clinic')document.documentElement.dataset.palette=p}catch(e){}`}
-        </Script>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
