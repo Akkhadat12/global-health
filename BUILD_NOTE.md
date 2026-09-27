@@ -24,7 +24,7 @@ The rejected paper stage is not switchable on the public site. Product stills ar
 
 ## Assets
 
-Official stills, background removed, served as WebP. Masters and source URLs are in `references/`. No generated lookalike tablets or pens. MariTide is a dashed empty slot because no approved device exists.
+Official stills are fetched at build time by `scripts/prepare-assets.mjs`, cut out, composited on `#E4EBF1`, and written to `public/assets` as WebP. Source URLs are in that script and in `references/SOURCES.md`. No generated lookalike tablets or pens. MariTide is a dashed empty slot because no approved device exists.
 
 Foundayo’s still is the pale pink round tablet with the Lilly mark. It was not recolored and it is not shown on the Wegovy scene.
 
