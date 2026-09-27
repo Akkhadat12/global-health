@@ -6,11 +6,18 @@ const SCENES = ["cover", "pen", "wegovy", "foundayo", "forecast", "offstage", "c
 type SceneId = (typeof SCENES)[number];
 
 const HOLD_MS = 480;
+const IMAGE_SCENES = new Set<SceneId>(["cover", "pen", "wegovy", "foundayo", "close"]);
+const PRODUCT_IMAGES = [
+  "/assets/wegovy-flex-pens.webp",
+  "/assets/wegovy-pill-25mg.webp",
+  "/assets/wegovy-pill-bottle.webp",
+  "/assets/foundayo-tablet-0.8mg.webp",
+];
 
 export default function Presenter() {
   const [index, setIndex] = useState(0);
   const indexRef = useRef(0);
-  const lockRef = useRef(false);
+  const lockRef = useRef(true);
   const reduceRef = useRef(false);
 
   useEffect(() => {
@@ -41,12 +48,9 @@ export default function Presenter() {
   function go(next: number) {
     const wrapped = (next + SCENES.length) % SCENES.length;
     if (lockRef.current || wrapped === indexRef.current) return;
+    lockRef.current = true;
     indexRef.current = wrapped;
     setIndex(wrapped);
-    lockRef.current = true;
-    window.setTimeout(() => {
-      lockRef.current = false;
-    }, reduceRef.current ? 280 : HOLD_MS);
   }
 
   function advance() {
@@ -54,15 +58,66 @@ export default function Presenter() {
   }
 
   function goCover() {
+    if (indexRef.current === 0) return;
     lockRef.current = false;
     go(0);
   }
 
   const scene = SCENES[index];
+  const sectionRef = useRef<HTMLElement>(null);
+  const [readyScene, setReadyScene] = useState<SceneId | null>(null);
+  const imagesReady = !IMAGE_SCENES.has(scene) || readyScene === scene;
+
+  useEffect(() => {
+    for (const src of PRODUCT_IMAGES) {
+      const img = new Image();
+      img.src = src;
+    }
+  }, []);
+
+  useEffect(() => {
+    lockRef.current = true;
+    if (!imagesReady) return;
+    const ms = reduceRef.current ? 280 : HOLD_MS;
+    const timer = window.setTimeout(() => {
+      lockRef.current = false;
+    }, ms);
+    return () => window.clearTimeout(timer);
+  }, [index, imagesReady]);
+
+  useEffect(() => {
+    if (!IMAGE_SCENES.has(scene)) return;
+    const root = sectionRef.current;
+    if (!root) return;
+    let live = true;
+    const imgs = Array.from(root.querySelectorAll("img"));
+    let frames = 0;
+    const poll = () => {
+      if (!live) return;
+      frames += 1;
+      const painted = imgs.every((img) => img.naturalWidth > 0);
+      if (painted || frames > 600) {
+        setReadyScene(scene);
+        return;
+      }
+      window.requestAnimationFrame(poll);
+    };
+    poll();
+    return () => {
+      live = false;
+    };
+  }, [scene]);
 
   return (
     <main className="stage">
-      <section className="scene" data-id={scene} key={scene} aria-live="polite">
+      <section
+        ref={sectionRef}
+        className={imagesReady ? "scene" : "scene scene-pending"}
+        data-id={scene}
+        key={scene}
+        aria-live="polite"
+        aria-busy={!imagesReady}
+      >
         {scene === "cover" && <Cover onAdvance={advance} />}
         {scene === "pen" && <Pen onAdvance={advance} />}
         {scene === "wegovy" && <Wegovy onAdvance={advance} />}
@@ -150,10 +205,11 @@ function Forecast({ onAdvance }: { onAdvance: () => void }) {
 function Offstage({ onAdvance }: { onAdvance: () => void }) {
   return (
     <>
-      <button className="hit" type="button" onClick={onAdvance} aria-label="Empty device slot, next scene">
+      <button className="hit" type="button" onClick={onAdvance} aria-label="MariTide not approved, phase 3 in 2027, next scene">
         <Slot />
       </button>
       <h1 className="label serif">Not approved</h1>
+      <p className="meta">MariTide · Phase 3</p>
       <p className="year-mark">2027</p>
     </>
   );
@@ -200,15 +256,18 @@ function AttainChart() {
   ];
   const max = 14;
   return (
-    <svg className="chart" viewBox="0 0 560 360" role="img" aria-label="ATTAIN-1 mean weight change at 72 weeks">
+    <svg className="chart" viewBox="0 0 560 390" role="img" aria-label="ATTAIN-1 treatment-regimen estimand, mean weight change at 72 weeks">
       <text x="0" y="28" fontSize="28" className="serif">
         ATTAIN-1
       </text>
       <text x="150" y="28" fontSize="16" fill="var(--muted)">
         72 weeks
       </text>
+      <text x="0" y="54" fontSize="15" fill="var(--muted)">
+        treatment-regimen estimand
+      </text>
       {rows.map((row, i) => {
-        const y = 70 + i * 68;
+        const y = 84 + i * 72;
         const width = (row.value / max) * 360;
         const fill = row.label === "placebo" ? "var(--placebo)" : "var(--y2025)";
         return (
@@ -228,40 +287,46 @@ function AttainChart() {
 }
 
 function ForecastChart() {
-  const x = (billions: number) => 168 + (billions / 150) * 430;
+  const x = (billions: number) => 176 + (billions / 150) * 360;
   return (
-    <svg className="chart" viewBox="0 0 680 420" role="img" aria-label="Dated 2030 obesity market estimates in billions of dollars">
-      <text x="168" y="36" fontSize="16" fill="var(--muted)">
-        $ billion
+    <svg className="chart" viewBox="0 0 720 460" role="img" aria-label="Goldman Sachs 2030 obesity market estimates in billions of dollars, dated">
+      <text x="176" y="28" fontSize="16" fill="var(--muted)">
+        $ billion · 2030
       </text>
       {[0, 50, 100, 150].map((tick) => (
         <g key={tick}>
-          <line x1={x(tick)} y1="58" x2={x(tick)} y2="340" stroke="var(--line)" />
-          <text x={x(tick)} y="366" fontSize="16" textAnchor="middle" fill="var(--muted)">
+          <line x1={x(tick)} y1="48" x2={x(tick)} y2="300" stroke="var(--line)" />
+          <text x={x(tick)} y="324" fontSize="16" textAnchor="middle" fill="var(--muted)">
             {tick}
           </text>
         </g>
       ))}
-      <text x="0" y="128" fontSize="18">
-        Prior
+      <text x="0" y="112" fontSize="16">
+        Pre–May 2025
       </text>
-      <circle cx={x(130)} cy="122" r="9" fill="none" stroke="var(--y2025)" strokeWidth="3" />
-      <text x={x(130) + 16} y="128" fontSize="18" fill="var(--y2025)">
+      <circle cx={x(130)} cy="106" r="9" fill="none" stroke="var(--y2025)" strokeWidth="3" />
+      <text x={x(130) + 16} y="112" fontSize="18" fill="var(--y2025)">
         $130B
       </text>
-      <text x="0" y="214" fontSize="18">
+      <text x="0" y="198" fontSize="16">
         May 2025
       </text>
-      <circle cx={x(95)} cy="208" r="9" fill="var(--y2025)" />
-      <text x={x(95) + 16} y="214" fontSize="18" fill="var(--y2025)">
+      <circle cx={x(95)} cy="192" r="9" fill="var(--y2025)" />
+      <text x={x(95) + 16} y="198" fontSize="18" fill="var(--y2025)">
         $95B
       </text>
-      <text x="0" y="300" fontSize="18">
-        2026
+      <text x="0" y="284" fontSize="16">
+        Jun 2026
       </text>
-      <line x1={x(102)} y1="294" x2={x(114)} y2="294" stroke="var(--y2026)" strokeWidth="10" strokeLinecap="round" />
-      <text x={x(114) + 16} y="300" fontSize="18" fill="var(--y2026)">
+      <line x1={x(102)} y1="278" x2={x(114)} y2="278" stroke="var(--y2026)" strokeWidth="10" strokeLinecap="round" />
+      <text x={x(114) + 16} y="284" fontSize="18" fill="var(--y2026)">
         $102–114B
+      </text>
+      <text x="0" y="392" fontSize="15" fill="var(--muted)">
+        Goldman Sachs. $130B is the figure cut in May 2025.
+      </text>
+      <text x="0" y="416" fontSize="15" fill="var(--muted)">
+        $102–114B is from June 2026 public summaries.
       </text>
     </svg>
   );

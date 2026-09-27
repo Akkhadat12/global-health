@@ -23,6 +23,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`} data-palette="clinic">
+      <head>
+        <link rel="preload" as="image" href="/assets/wegovy-flex-pens.webp" />
+        <link rel="preload" as="image" href="/assets/wegovy-pill-25mg.webp" />
+        <link rel="preload" as="image" href="/assets/wegovy-pill-bottle.webp" />
+        <link rel="preload" as="image" href="/assets/foundayo-tablet-0.8mg.webp" />
+      </head>
       <body>{children}</body>
     </html>
   );

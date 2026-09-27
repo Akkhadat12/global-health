@@ -28,6 +28,16 @@ Official stills are fetched at build time by `scripts/prepare-assets.mjs`, cut o
 
 Foundayo’s still is the pale pink round tablet with the Lilly mark. It was not recolored and it is not shown on the Wegovy scene.
 
+## QA fixes
+
+The pen still is keyed by flood-filling the official mint background through the soft fringe (color distance 18), then composited on `#E4EBF1` with a hard edge and no blurred shadow. The old feather plus shadow was the gray halo around the pens and the Wegovy wordmarks. White type and the green pen bodies sit past that cutoff, so they stay intact. The pen file is lossless WebP.
+
+Scenes that use product stills stay hidden until those `<img>` elements have decoded, and Space does not advance while a scene is still hidden. The four stills are also preloaded from the document head.
+
+ATTAIN-1 on screen is the 72-week treatment-regimen estimand (−7.5 / −8.4 / −11.2% versus −2.1%), not the efficacy estimand (−7.8 / −9.3 / −12.4% versus −0.9%). The chart says so.
+
+The forecast rows are dated: pre–May 2025 $130B, Goldman May 2025 $95B, and June 2026 public summaries $102–114B. MariTide is named on the empty-slot scene as phase 3, still not approved, with the 2027 mark.
+
 ## Claims kept off the stage
 
 Checked on 27 September 2026: Foundayo’s FDA approval is for weight management, not type 2 diabetes. The site does not say it is approved for diabetes.

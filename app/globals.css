@@ -56,6 +56,11 @@ button, img { user-select: none; }
   animation: settle 480ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+.scene-pending {
+  visibility: hidden;
+  animation: none;
+}
+
 @keyframes settle {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
@@ -199,7 +204,8 @@ button, img { user-select: none; }
   place-items: center;
   align-content: center;
   justify-items: center;
-  gap: 3vh;
+  gap: 2.2vh;
+  text-align: center;
 }
 
 .slot {
