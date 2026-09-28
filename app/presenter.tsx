@@ -289,7 +289,7 @@ function AttainChart() {
 function ForecastChart() {
   const x = (billions: number) => 176 + (billions / 150) * 360;
   return (
-    <svg className="chart" viewBox="0 0 720 348" role="img" aria-label="2030 obesity forecasts in billions of dollars: Goldman prior 130 billion before May 2025, Goldman 95 billion in May 2025, Reuters about 100 billion in February 2026, Goldman 114 billion in June 2026">
+    <svg className="chart" viewBox="0 0 720 348" role="img" aria-label="2030 obesity forecasts in billions of dollars: Goldman prior 130 billion before May 2025, Goldman 95 billion in May 2025, Goldman 105 billion in February 2026, Goldman 114 billion in July 2026">
       <text x="188" y="22" fontSize="16" fill="var(--muted)">
         $ billion · 2030
       </text>
@@ -325,14 +325,14 @@ function ForecastChart() {
         Feb 2026
       </text>
       <text x="0" y="240" fontSize="14" fill="var(--muted)">
-        Reuters
+        Goldman
       </text>
-      <circle cx={x(100)} cy="226" r="9" fill="none" stroke="var(--y2026)" strokeWidth="3" />
-      <text x={x(100) + 16} y="232" fontSize="18" fill="var(--y2026)">
-        ~$100B
+      <circle cx={x(105)} cy="226" r="9" fill="none" stroke="var(--y2026)" strokeWidth="3" />
+      <text x={x(105) + 16} y="232" fontSize="18" fill="var(--y2026)">
+        $105B
       </text>
       <text x="0" y="268" fontSize="16">
-        Jun 2026
+        Jul 2026
       </text>
       <text x="0" y="286" fontSize="14" fill="var(--muted)">
         Goldman

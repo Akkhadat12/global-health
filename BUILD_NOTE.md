@@ -36,7 +36,7 @@ Scenes that use product stills stay hidden until those `<img>` elements have dec
 
 ATTAIN-1 on screen is the 72-week treatment-regimen estimand (−7.5 / −8.4 / −11.2% versus −2.1%), not the efficacy estimand (−7.8 / −9.3 / −12.4% versus −0.9%). The chart says so.
 
-The forecast is four dated estimates, not one 2026 interval. Goldman’s prior figure is the open mark at $130B (pre–May 2025). Goldman’s May 2025 cut is $95B. Reuters in February 2026 put Wall Street models near $100B. The June 2026 public summary of Goldman is $114B. The old $102–114B bar mixed those last two publications and the caption ran past the scene’s word budget, so both are gone. MariTide is named on the empty-slot scene as phase 3, still not approved, with the 2027 mark.
+The forecast is four dated estimates, not one 2026 interval. Goldman’s prior figure is the open mark at $130B (pre–May 2025). Goldman’s May 2025 cut is $95B. Reuters on 2 Feb 2026 attributes Goldman’s then-current 2030 figure at $105B; the article’s “about $100 billion” is a summary of analyst forecasts, not a Reuters forecast. Goldman’s own article of 10 Jul 2026 states the 2030 figure was recently raised to $114B, so that point is dated July 2026. MariTide is named on the empty-slot scene as phase 3, still not approved, with the 2027 mark.
 
 ## Claims kept off the stage
 
@@ -44,7 +44,7 @@ Checked on 27 September 2026: Foundayo’s FDA approval is for weight management
 
 ATTAIN-1 figures on screen are the brief’s 72-week means: −7.5 / −8.4 / −11.2% versus −2.1% placebo. OASIS 4 is not printed, so it cannot be mistaken for a head-to-head.
 
-2030 figures are labeled forecasts: Goldman prior $130B, Goldman May 2025 $95B, Reuters February 2026 about $100B, and Goldman June 2026 $114B.
+2030 figures are labeled forecasts: Goldman prior $130B, Goldman May 2025 $95B, Goldman February 2026 $105B, and Goldman July 2026 $114B.
 
 ## Interaction
 
