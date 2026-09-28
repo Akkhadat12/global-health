@@ -289,44 +289,57 @@ function AttainChart() {
 function ForecastChart() {
   const x = (billions: number) => 176 + (billions / 150) * 360;
   return (
-    <svg className="chart" viewBox="0 0 720 460" role="img" aria-label="Goldman Sachs 2030 obesity market estimates in billions of dollars, dated">
-      <text x="176" y="28" fontSize="16" fill="var(--muted)">
+    <svg className="chart" viewBox="0 0 720 348" role="img" aria-label="2030 obesity forecasts in billions of dollars: Goldman prior 130 billion before May 2025, Goldman 95 billion in May 2025, Reuters about 100 billion in February 2026, Goldman 114 billion in June 2026">
+      <text x="188" y="22" fontSize="16" fill="var(--muted)">
         $ billion · 2030
       </text>
       {[0, 50, 100, 150].map((tick) => (
         <g key={tick}>
-          <line x1={x(tick)} y1="48" x2={x(tick)} y2="300" stroke="var(--line)" />
-          <text x={x(tick)} y="324" fontSize="16" textAnchor="middle" fill="var(--muted)">
+          <line x1={x(tick)} y1="36" x2={x(tick)} y2="286" stroke="var(--line)" />
+          <text x={x(tick)} y="332" fontSize="16" textAnchor="middle" fill="var(--muted)">
             {tick}
           </text>
         </g>
       ))}
-      <text x="0" y="112" fontSize="16">
+      <text x="0" y="78" fontSize="16">
         Pre–May 2025
       </text>
-      <circle cx={x(130)} cy="106" r="9" fill="none" stroke="var(--y2025)" strokeWidth="3" />
-      <text x={x(130) + 16} y="112" fontSize="18" fill="var(--y2025)">
+      <text x="0" y="96" fontSize="14" fill="var(--muted)">
+        Goldman prior
+      </text>
+      <circle cx={x(130)} cy="82" r="9" fill="none" stroke="var(--y2025)" strokeWidth="3" />
+      <text x={x(130) + 16} y="88" fontSize="18" fill="var(--y2025)">
         $130B
       </text>
-      <text x="0" y="198" fontSize="16">
+      <text x="0" y="150" fontSize="16">
         May 2025
       </text>
-      <circle cx={x(95)} cy="192" r="9" fill="var(--y2025)" />
-      <text x={x(95) + 16} y="198" fontSize="18" fill="var(--y2025)">
+      <text x="0" y="168" fontSize="14" fill="var(--muted)">
+        Goldman
+      </text>
+      <circle cx={x(95)} cy="154" r="9" fill="var(--y2025)" />
+      <text x={x(95) + 16} y="160" fontSize="18" fill="var(--y2025)">
         $95B
       </text>
-      <text x="0" y="284" fontSize="16">
+      <text x="0" y="222" fontSize="16">
+        Feb 2026
+      </text>
+      <text x="0" y="240" fontSize="14" fill="var(--muted)">
+        Reuters
+      </text>
+      <circle cx={x(100)} cy="226" r="9" fill="none" stroke="var(--y2026)" strokeWidth="3" />
+      <text x={x(100) + 16} y="232" fontSize="18" fill="var(--y2026)">
+        ~$100B
+      </text>
+      <text x="0" y="268" fontSize="16">
         Jun 2026
       </text>
-      <line x1={x(102)} y1="278" x2={x(114)} y2="278" stroke="var(--y2026)" strokeWidth="10" strokeLinecap="round" />
-      <text x={x(114) + 16} y="284" fontSize="18" fill="var(--y2026)">
-        $102–114B
+      <text x="0" y="286" fontSize="14" fill="var(--muted)">
+        Goldman
       </text>
-      <text x="0" y="392" fontSize="15" fill="var(--muted)">
-        Goldman Sachs. $130B is the figure cut in May 2025.
-      </text>
-      <text x="0" y="416" fontSize="15" fill="var(--muted)">
-        $102–114B is from June 2026 public summaries.
+      <circle cx={x(114)} cy="272" r="9" fill="var(--y2026)" />
+      <text x={x(114) + 16} y="278" fontSize="18" fill="var(--y2026)">
+        $114B
       </text>
     </svg>
   );
